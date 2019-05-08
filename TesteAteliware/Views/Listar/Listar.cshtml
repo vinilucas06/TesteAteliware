@@ -1,0 +1,41 @@
+﻿@model List<PortalTest.Models.GitRepositorie>
+@{
+    ViewData["Title"] = "Repositórios Salvos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Linguagem</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Visualizações</th>
+                <th scope="col">#</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+            <tr>
+
+                <td>@item.Name</td>
+
+                <td>@item.Language</td>
+
+                <td>@item.Description</td>
+
+                <td>@item.WatchCount</td>
+                <td>
+                    <a href='@Url.Action("Detalhe", "Listar", new { item.Id })'> Detalhes</a>
+                </td>
+            </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</div>

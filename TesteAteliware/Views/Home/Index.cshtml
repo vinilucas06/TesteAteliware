@@ -1,0 +1,60 @@
+﻿@model PortalTest.Models.GitRepositorie
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <form asp-controller="Home" asp-action="Buscar" method="post">
+        <div class="form-group">
+            <label asp-for="Language"></label>
+            <select asp-for="Language" class="form-control custom-select col-md-6">
+                <option value=""> -- Selecione -- </option>
+                <option value="Python"> Python </option>
+                <option value="C"> C </option>
+                <option value="Php"> Php </option>
+                <option value="JavaScript"> JavaScript </option>
+                <option value="Java"> Java </option>
+            </select>
+            <span asp-validation-for="Language"></span>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Buscar</button>
+    </form>
+    <br />
+    @if (ViewBag.Resultado != null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Linguagem</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Visualizações</th>
+                    <th scope="col">#</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in ViewBag.Resultado)
+                {
+                <tr>
+
+                    <td>@item.Name</td>
+
+                    <td>@item.Language</td>
+
+                    <td>@item.Description</td>
+
+                    <td>@item.WatchCount</td>
+                    <td>
+                        <a href='@Url.Action("Detalhe", "Home", new { item.Id })'> Detalhes</a>
+                        <a href='@Url.Action("Salvar", "Home", new { item.Id })'> Salvar</a>
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+
+    </div>
